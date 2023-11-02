@@ -100,10 +100,10 @@ public class Ejercicio6 {
                         for (DispositivoElectronico d : dispositivos) {
                             if (d.getClass() == Telefono.class) {
                                 Telefono t = (Telefono) d;
-                                wr.write("1,"+d.isTurnedOn()+","+t.getModelo());
+                                wr.write("1,"+d.isTurnedOn()+","+t.getModelo()+"\n");
                             } else if (d.getClass() == Computadora.class) {
                                 Computadora c = (Computadora) d;
-                                wr.write("0,"+d.isTurnedOn()+","+c.getMarca());
+                                wr.write("0,"+d.isTurnedOn()+","+c.getMarca()+"\n");
                             }
                         }
                     } catch (Exception e) {
