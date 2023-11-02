@@ -15,7 +15,7 @@ public class Ejercicio6 {
         boolean menu = true;
         Scanner s = new Scanner(System.in);
         while (menu) {// menú de opciones
-            System.out.println("Bienvenido, ingrese una opción:\n1.Añadir dispositivo\n2.Ver información de cada dispositivo\n3.Validar elementos encendidos\n4.Cargar archivo csv con datos\n5.Guardar datos en archivo csv\n6.Salir");
+            System.out.println("Bienvenido, ingrese una opción:\n1.Añadir dispositivo\n2.Ver información de cada dispositivo\n3.Validar elementos encendidos\n4.Cargar archivo csv con datos\n5.Guardar datos en archivo csv\n6.Encender/Apagar por modelo/marca\n7.Salir");
             int op = s.nextInt();
             switch (op) {
                 case 1:// añadir un nuevo dispositivo
@@ -110,7 +110,33 @@ public class Ejercicio6 {
                         System.out.println("Error en la escritura");
                     }
                     break;
-                case 6:// Salir
+                case 6://Encender o apagar los dispositivos de cierto tipo
+                    System.out.println("Ingrese el modelo/marca de dispositivo a cambiar de estado:");
+                    s.nextLine();
+                    String mm = s.nextLine();
+                    for (DispositivoElectronico d : dispositivos) {
+                        if (d.getClass() == Telefono.class) {
+                            Telefono t = (Telefono) d;
+                            if (t.getModelo().equals(mm)) {
+                                if (t.isTurnedOn()) {
+                                    dispositivos.get(dispositivos.indexOf(d)).Off();
+                                } else {
+                                    dispositivos.get(dispositivos.indexOf(d)).On();
+                                }
+                            }
+                        } else if (d.getClass() == Computadora.class) {
+                            Computadora c = (Computadora) d;
+                            if (c.getMarca().equals(mm)) {
+                                if (c.isTurnedOn()) {
+                                    dispositivos.get(dispositivos.indexOf(d)).Off();
+                                } else {
+                                    dispositivos.get(dispositivos.indexOf(d)).On();
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 7:// Salir
                     menu = false;
                     break;
                 default:
