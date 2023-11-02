@@ -15,7 +15,7 @@ public class Ejercicio6 {
         boolean menu = true;
         Scanner s = new Scanner(System.in);
         while (menu) {// menú de opciones
-            System.out.println("Bienvenido, ingrese una opción:\n1.Añadir dispositivo\n2.Ver información de cada dispositivo\n3.Validar elementos encendidos\n4.Cargar archivo csv con datos\n5.Guardar datos en archivo csv\n6.Encender/Apagar por modelo/marca\n7.Salir");
+            System.out.println("Bienvenido, ingrese una opción:\n1.Añadir dispositivo\n2.Ver información de cada dispositivo\n3.Validar elementos encendidos y apagados\n4.Cargar archivo csv con datos\n5.Guardar datos en archivo csv\n6.Encender/Apagar por modelo/marca\n7.Salir");
             int op = s.nextInt();
             switch (op) {
                 case 1:// añadir un nuevo dispositivo
@@ -56,7 +56,7 @@ public class Ejercicio6 {
                         }
                     }
                     break;
-                case 3:// verificar dispositivos encendidos
+                case 3:// verificar dispositivos encendidos y apagados
                     System.out.println("Elementos encendidos: ");
                     for (DispositivoElectronico d: dispositivos) {
                         if (d.isTurnedOn() == true) {
@@ -69,12 +69,24 @@ public class Ejercicio6 {
                             }
                         }
                     }
+                    System.out.println("Elementos apagados: ");
+                    for (DispositivoElectronico d: dispositivos) {
+                        if (d.isTurnedOn() == false) {
+                            if (d.getClass() == Telefono.class) {
+                                Telefono t = (Telefono) d;
+                                System.out.println("Tipo: Teléfono, Encendido: " + t.isTurnedOn() + ", Modelo: " + t.getModelo());
+                            } else if (d.getClass() == Computadora.class) {
+                                Computadora c = (Computadora) d;
+                                System.out.println("Tipo: Computadora, Encendido: " + c.isTurnedOn() + ", Marca: " + c.getMarca());
+                            }
+                        }
+                    }
                     break; 
                 case 4:// Cargar de archivo .csv
-                    System.out.println("Escriba el nombre del archivo csv a cargar:");
+                    System.out.println("Escriba el nombre del archivo csv a cargar. La extensión .csv se añade automáticamente");
                     s.nextLine();
                     String path = s.nextLine();
-                    try (Scanner rd = new Scanner(new File(path))) {
+                    try (Scanner rd = new Scanner(new File(path+".csv"))) {
                         while (rd.hasNextLine()) {
                             Scanner ln = new Scanner(rd.nextLine());
                             ln.useDelimiter(",");
